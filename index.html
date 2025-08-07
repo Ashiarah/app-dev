@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brew & Order - Coffee Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-coffee"></i>
+                <h1>Brew & Order</h1>
+            </div>
+            <nav class="nav">
+                <a href="#menu" class="nav-link">Menu</a>
+                <a href="#cart" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    Cart (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h2>Fresh Coffee, Quick Orders</h2>
+                <p>Scan, Order, Enjoy - Skip the wait with our QR ordering system</p>
+                <button class="cta-button" onclick="scrollToMenu()">Order Now</button>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="menu-section">
+            <div class="container">
+                <h2>Our Menu</h2>
+                <div class="menu-categories">
+                    <button class="category-btn active" data-category="coffee">Coffee</button>
+                    <button class="category-btn" data-category="tea">Tea</button>
+                    <button class="category-btn" data-category="pastries">Pastries</button>
+                    <button class="category-btn" data-category="sandwiches">Sandwiches</button>
+                </div>
+                <div class="menu-grid" id="menu-grid">
+                    <!-- Menu items will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <section id="cart" class="cart-section">
+            <div class="container">
+                <h2>Your Order</h2>
+                <div class="cart-content">
+                    <div class="cart-items" id="cart-items">
+                        <p class="empty-cart">Your cart is empty</p>
+                    </div>
+                    <div class="cart-summary">
+                        <div class="total">
+                            <span>Total: $<span id="cart-total">0.00</span></span>
+                        </div>
+                        <button class="checkout-btn" id="checkout-btn" disabled>Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Modal -->
+        <div id="order-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Order Confirmation</h2>
+                <div class="order-details">
+                    <h3>Customer Information</h3>
+                    <form id="customer-form">
+                        <input type="text" id="customer-name" placeholder="Your Name" required>
+                        <input type="tel" id="customer-phone" placeholder="Phone Number" required>
+                        <select id="pickup-time" required>
+                            <option value="">Select Pickup Time</option>
+                            <option value="15">15 minutes</option>
+                            <option value="30">30 minutes</option>
+                            <option value="45">45 minutes</option>
+                            <option value="60">1 hour</option>
+                        </select>
+                        <textarea id="special-instructions" placeholder="Special instructions (optional)"></textarea>
+                    </form>
+                    
+                    <div class="order-summary">
+                        <h3>Order Summary</h3>
+                        <div id="order-items"></div>
+                        <div class="order-total">
+                            Total: $<span id="order-total">0.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-section">
+                        <h3>Payment Method</h3>
+                        <div class="payment-options">
+                            <button class="payment-btn active" data-method="card">
+                                <i class="fas fa-credit-card"></i> Card
+                            </button>
+                            <button class="payment-btn" data-method="cash">
+                                <i class="fas fa-money-bill"></i> Cash on Pickup
+                            </button>
+                            <button class="payment-btn" data-method="mobile">
+                                <i class="fas fa-mobile-alt"></i> Mobile Pay
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Code Modal -->
+        <div id="qr-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeQRModal()">&times;</span>
+                <h2>Order Placed Successfully!</h2>
+                <div class="qr-section">
+                    <p>Your order number: <strong id="order-number"></strong></p>
+                    <p>Scan this QR code to track your order:</p>
+                    <div id="qr-code"></div>
+                    <p class="pickup-info">Estimated pickup time: <span id="pickup-time-display"></span></p>
+                    <p class="order-instructions">Show this QR code when picking up your order</p>
+                </div>
+                <div class="order-actions">
+                    <button class="btn secondary" onclick="downloadQR()">Download QR Code</button>
+                    <button class="btn primary" onclick="newOrder()">New Order</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Brew & Order Coffee Shop. All rights reserved.</p>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Coffee Street, Brewtown</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
